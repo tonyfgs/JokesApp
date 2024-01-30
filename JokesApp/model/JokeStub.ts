@@ -1,5 +1,6 @@
 import {SampleJoke} from "./SampleJoke";
 
+// Stub permettant de stocker les différentes blagues de différents types
 export class JokeStub {
     // Données JSON pour les CustomJokes
     public static customJokes = '[{"type":"custom", "setup":"Quel jour les poules ont-elles l anus dilaté au maximum ?", "punchline":"Le jour où elles passent du coq à l âne.", "image":"image1", "id":"id1"}, {"type":"custom", "setup":"Savez-vous comment on appelle le sexe de Michael Jackson ???", "punchline":"Vérité ! Car la vérité sort toujours de la bouche des enfants .", "image":"image2", "id":"id2"}]';

@@ -1,3 +1,4 @@
+// Classe abstraite Joke permettant de creer une joke avec différents attributs
 export abstract class Joke{
 
     private _type : string
@@ -27,10 +28,12 @@ export abstract class Joke{
         return this._image;
     }
 
+    // Permet d'afficher les 25 premiers caractères du contexte de la blague suivis de ...
     public summary():string{
         return this.setup.substring(0,25) + ' ...'
     }
 
+    // Permet de retourner le type d'une blague + sont contexte
     public description():string{
         return this.type() + ' - ' +this.summary()
     }

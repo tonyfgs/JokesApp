@@ -6,6 +6,8 @@ import {loadExtensions} from "./extensions";
 loadExtensions();
 
 export default function App() {
+
+    // La JokeFactory permet de transformer les blagues json en tableau de blague SampleJoke ou CustomJoke afin de pouvoir les afficher
     let customJokes = JokeFactory.createCustomJokes(JokeStub.customJokes);
     let samplesJokes = JokeFactory.createSampleJokes(JokeStub.sampleJokes);
 
