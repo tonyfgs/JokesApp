@@ -1,4 +1,8 @@
-class CustomJoke extends Joke{
+import { Joke } from "./Joke";
+
+export class CustomJoke extends Joke{
+    private  _id : string
+
     get id(): string {
         return this._id;
     }
@@ -9,7 +13,6 @@ class CustomJoke extends Joke{
     }
 
 
-    private _id : string
 
 
 }

@@ -1,4 +1,4 @@
-abstract class Joke{
+export abstract class Joke{
 
     private _type : string
     private _setup : string
@@ -28,11 +28,13 @@ abstract class Joke{
     }
 
     public summary():string{
-        return this.setup.padEnd(25,'.')
+        return this.setup.substring(0,25) + ' ...'
     }
 
     public description():string{
-        return this.type+ ' - ' +this.summary()
+        return this.type() + ' - ' +this.summary()
     }
+
+
 }
 
