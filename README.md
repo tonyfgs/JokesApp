@@ -1,9 +1,14 @@
 <h1 align="center">JokeAPP</h1>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/.NET-5C2D91.svg?style=for-the-badge&logo=.net&logoColor=white" alt=".NET"/>
-  <img src="https://img.shields.io/badge/C%23-239120.svg?style=for-the-badge&logo=c-sharp&logoColor=white" alt="C#"/>
-  <img src="https://img.shields.io/badge/Entity_Framework-512BD4.svg?style=for-the-badge&logo=entity-framework&logoColor=white" alt="Entity Framework"/>
+  <img src="https://img.shields.io/badge/React_Native-20232A.svg?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React Native"/>
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E.svg?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript"/>
+  <img src="https://img.shields.io/badge/TypeScript-3178C6.svg?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript"/>
+  <img src="https://img.shields.io/badge/Node.js-339933.svg?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js"/>
+  <img src="https://img.shields.io/badge/Expo-000020.svg?style=for-the-badge&logo=expo&logoColor=white" alt="Expo"/>
+  <img src="https://img.shields.io/badge/Android-3DDC84.svg?style=for-the-badge&logo=android&logoColor=white" alt="Android"/>
+  <img src="https://img.shields.io/badge/iOS-000000.svg?style=for-the-badge&logo=ios&logoColor=white" alt="iOS"/>
+
 </p>
 
 ## Introduction
