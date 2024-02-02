@@ -1,35 +1,36 @@
-import {StatusBar} from 'expo-status-bar';
-import {StyleSheet, Text, View} from 'react-native';
-import {JokeStub} from "./model/JokeStub";
-import {JokeFactory} from "./model/JokeFactory";
-import {loadExtensions} from "./extensions";
-loadExtensions();
+import {SafeAreaView, StatusBar, StyleSheet} from 'react-native';
+import React from "react";
+import {ListJokeScreen} from "./screens/ListJokeScreen";
+
 
 export default function App() {
-
-    // La JokeFactory permet de transformer les blagues json en tableau de blague SampleJoke ou CustomJoke afin de pouvoir les afficher
-    let customJokes = JokeFactory.createCustomJokes(JokeStub.customJokes);
-    let samplesJokes = JokeFactory.createSampleJokes(JokeStub.sampleJokes);
-
     return (
-        <View style={styles.container}>
-            <Text>CustomJokes</Text>
-            <Text>{customJokes.displayJoke()}</Text>
-            <Text>SamplesJokes</Text>
-            <Text>{samplesJokes.displayJoke()}</Text>
-
-            <StatusBar style="auto"/>
-        </View>
+        <SafeAreaView style={styles.container}>
+            <StatusBar barStyle="light-content" />
+            <ListJokeScreen/>
+        </SafeAreaView>
     );
 }
 
-// Styles pour le composant
+
+
+// Mise à jour des styles pour inclure le style de la liste
 const styles = StyleSheet.create({
+
+    title: {
+        fontSize: 24,
+        color: 'darksalmon',
+        textAlign: 'center',
+        marginVertical: 20,
+    },
+    titleResume: {
+        fontSize: 15,
+        fontWeight: 'bold',
+        marginBottom: 20,
+    },
     container: {
         flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
+        backgroundColor: 'rgba(14, 14, 44, 1)',
+
     },
 });
-
