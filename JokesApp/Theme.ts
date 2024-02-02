@@ -1,0 +1,1 @@
+export const indigo = "rgba(74, 74, 104, 1)"
