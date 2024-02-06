@@ -4,6 +4,9 @@ import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {ListJokeScreen} from "../screens/ListJokeScreen";
 import {Image, StyleSheet, View} from "react-native";
 import {darksalmonColor, greyColor, indigo, purpleColor} from "../Theme";
+import {AccueilScreen} from "../screens/AccueilScreen";
+import {AddJokeScreen} from "../screens/AddJokeScreen";
+import {SettingsScreen} from "../screens/SettingsScreen";
 const homeIcon = require("../assets/home_icon.png");
 const listIcon = require("../assets/list_icon.png");
 const addIcon = require("../assets/add_icon.png");
@@ -27,7 +30,7 @@ export function Navigation(){
                 tabBarShowLabel: false,
                 tabBarStyle: styles.top,
             }}  >
-                <BottomTabNavigator.Screen name="Accueil" component={ListJokeScreen}
+                <BottomTabNavigator.Screen name="Accueil" component={AccueilScreen}
                                            options={{
                                                tabBarIcon: ({focused}) => (
                                                    <Image
@@ -44,9 +47,8 @@ export function Navigation(){
                                                    />
                                                )
                                            }}/>
-                <BottomTabNavigator.Screen name="Ajouter" component={ListJokeScreen}
+                <BottomTabNavigator.Screen name="Ajouter" component={AddJokeScreen}
                                            options={{
-                                               tabBarShowLabel: false,
                                                tabBarIcon: ({focused}) => (
                                                    <View style={styles.addJoke}>
                                                        <Image source={addIcon}
@@ -64,7 +66,7 @@ export function Navigation(){
                                                    />
                                                )
                                            }}/>
-                <BottomTabNavigator.Screen name="Paramètres" component={ListJokeScreen}
+                <BottomTabNavigator.Screen name="Paramètres" component={SettingsScreen}
                                            options={{
                                                tabBarIcon: ({focused}) => (
                                                    <Image source={setIcon}

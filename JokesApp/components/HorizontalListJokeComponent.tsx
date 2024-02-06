@@ -2,12 +2,14 @@ import {Image, ImageBackground, StyleSheet, Text, View} from "react-native";
 import React from "react";
 import {Joke} from "../model/Joke";
 import * as url from "url";
-import {indigo} from "../Theme";
+import {greyColor, indigo, purpleColor} from "../Theme";
 
 type JokeListItemProps = {
     item: Joke;
 }
-export function JokeListItems(props: JokeListItemProps) {
+
+
+export function HorizontalListJokeComponent(props: JokeListItemProps) {
     return (
         <View style={styles.listItem}>
             <View style={styles.rectangle}></View>
@@ -16,14 +18,11 @@ export function JokeListItems(props: JokeListItemProps) {
             <View style={styles.contentList}>
                 <Text style={styles.titleResume}>Résumé de la blague</Text>
                 <Text style={styles.contentSummary}>{props.item.summary()}</Text>
-                <View style={styles.chip}>
-                    <Text >Type : {props.item.type()}</Text>
-                </View>
+
             </View>
         </View>
     )
 }
-
 
 const styles = StyleSheet.create({
 
@@ -31,36 +30,47 @@ const styles = StyleSheet.create({
         fontSize: 15,
         fontWeight: 'bold',
         marginBottom: 20,
-        color: "rgba(239, 239, 253, 1)",
+        color: "white",
+        textAlign: 'center',
     },
     listItem: {
-        flexDirection: 'row',
+        flexDirection: 'column',
         alignItems: 'center',
+        backgroundColor: indigo,
         margin: 10,
-        backgroundColor : indigo,
+        height: 270,
+        width: 250,
+        borderRadius: 5,
     },
     imageSettings: {
-        width: '40%',
+        width: '75%',
         height: 150,
+        position: 'absolute',
+        margin: 5,
     },
     contentList :{
-        margin: 10,
+        flex: 1,
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        margin: 30,
     },
     chip: {
         borderRadius: 16,
-        backgroundColor: 'rgba(140, 140, 161, 1)',
+        backgroundColor: greyColor,
         padding: 5,
         marginTop: 5,
-        alignSelf: 'flex-start',
+        alignSelf: 'center',
     },
     rectangle: {
+        borderRadius: 4,
         flexShrink: 0,
-        width: 11,
-        height: 150,
+        width: "100%",
+        height: "20%",
         backgroundColor: 'darksalmon',
     },
     contentSummary: {
-        color: "rgba(239, 239, 253, 1)",
+        textAlign: 'center',
+        color: "white",
     }
 
 });
