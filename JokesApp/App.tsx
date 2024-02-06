@@ -1,13 +1,15 @@
 import {SafeAreaView, StatusBar, StyleSheet} from 'react-native';
 import React from "react";
 import {ListJokeScreen} from "./screens/ListJokeScreen";
+import {Navigation} from "./navigation/Navigation";
+import {darksalmonColor, indigo, purpleColor} from "./Theme";
 
 
 export default function App() {
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar barStyle="light-content" />
-            <ListJokeScreen/>
+            <Navigation/>
         </SafeAreaView>
     );
 }
@@ -19,7 +21,7 @@ const styles = StyleSheet.create({
 
     title: {
         fontSize: 24,
-        color: 'darksalmon',
+        color: darksalmonColor,
         textAlign: 'center',
         marginVertical: 20,
     },
@@ -30,7 +32,7 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        backgroundColor: 'rgba(14, 14, 44, 1)',
+        backgroundColor: indigo,
 
     },
 });

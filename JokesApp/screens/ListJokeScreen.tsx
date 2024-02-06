@@ -4,7 +4,7 @@ import {JokeListItems} from "../components/ListeJokeComponent";
 import {Joke} from "../model/Joke";
 import {JokeFactory} from "../model/JokeFactory";
 import {JokeStub} from "../model/JokeStub";
-import {indigo} from "../Theme";
+import {indigo, purpleColor} from "../Theme";
 
 
 const DATACUSTOM = JokeFactory.createCustomJokes(JokeStub.customJokes)
@@ -16,9 +16,6 @@ let DataGen = DATACUSTOM.concat(DATASAMPLE);
 export function ListJokeScreen() {
     return (
         <SafeAreaView style={styles.container}>
-            <View style={styles.top}>
-                <Text style={styles.title}>Liste des Blagues</Text>
-            </View>
             <FlatList
                 data={DataGen}
                 renderItem={JokeListItems}
@@ -45,11 +42,11 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        backgroundColor: indigo,
+        backgroundColor: purpleColor    ,
 
     },
     top: {
-        backgroundColor : "rgba(14, 14, 44, 1)"
+        backgroundColor : indigo,
     },
 
 
