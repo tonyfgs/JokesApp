@@ -1,21 +1,28 @@
 import {FlatList, Image, SafeAreaView, ScrollView, SectionListComponent, StyleSheet, Text, View} from "react-native";
 import {indigo, purpleColor} from "../Theme";
-import {JokeListItems} from "../components/ListeJokeComponent";
 import {Joke} from "../model/Joke";
-import {JokeFactory} from "../model/JokeFactory";
-import {JokeStub} from "../model/JokeStub";
-import {ListJokeScreen} from "./ListJokeScreen";
+import {DataGen, ListJokeScreen} from "./ListJokeScreen";
 import React from "react";
 import {HorizontalListJokeComponent} from "../components/HorizontalListJokeComponent";
 import {ListAllCategories} from "../components/ListAllCategories";
 
-const DATACUSTOM = JokeFactory.createCustomJokes(JokeStub.customJokes)
-const DATASAMPLE = JokeFactory.createSampleJokes(JokeStub.sampleJokes)
+let taille = DataGen.length;
+let LastJokes = DataGen.slice(taille - 16, taille);
 
-//@ts-ignore
-let DataGen = DATACUSTOM.concat(DATASAMPLE);
-let FilterData = DataGen.filter((joke) => joke.type() !== joke.type() )
+function filterCategory(jokes: Joke[]): String[] {
+    let categories: String[] = [];
+    jokes.forEach(joke => {
+        if (!categories.includes(joke.type())) {
+            categories.push(joke.type());
+        }
+    });
+    return categories;
+}
 export function AccueilScreen() {
+
+    // Permet de filtrer les types des blagues pour les afficher dans la liste des categories
+    const FiltereData = filterCategory(LastJokes);
+
     return (
         <SafeAreaView style={styles.container}>
 
@@ -24,8 +31,8 @@ export function AccueilScreen() {
                 <Text style={styles.title}>Chat C'est Drôle</Text>
                 <Text style={styles.titleAccueil}>Dernieres Blagues</Text>
             </View>
-            <FlatList showsHorizontalScrollIndicator={false} horizontal={true}
-                data={DataGen}
+            <FlatList  showsHorizontalScrollIndicator={false} horizontal={true}
+                data={LastJokes}
                 renderItem={HorizontalListJokeComponent}
                 keyExtractor={(item: Joke) => item.summary()}
             />
@@ -34,9 +41,9 @@ export function AccueilScreen() {
                 <Image source={require("../assets/fire_icon.png")}/>
             </View>
             <FlatList showsHorizontalScrollIndicator={false} horizontal={true}
-                      data={FilterData}
+                      data={FiltereData}
                       renderItem={ListAllCategories}
-                      keyExtractor={(item: Joke) => item.summary()}
+                      keyExtractor={(item) => item.toString()}
             />
         </SafeAreaView>
     );

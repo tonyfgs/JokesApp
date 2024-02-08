@@ -4,14 +4,17 @@ import React from "react";
 import {indigo} from "../Theme";
 
 type JokeListItemProps = {
-    item: Joke;
+    item: String;
 }
+
+
+
 export function ListAllCategories(props: JokeListItemProps) {
 
     return (
         <View style={styles.listItem}>
                 <View style={styles.chip}>
-                    <Text>{props.item.type()}</Text>
+                    <Text>{props.item}</Text>
                 </View>
         </View>
     );

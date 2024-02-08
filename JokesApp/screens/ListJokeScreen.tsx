@@ -11,7 +11,7 @@ const DATACUSTOM = JokeFactory.createCustomJokes(JokeStub.customJokes)
 const DATASAMPLE = JokeFactory.createSampleJokes(JokeStub.sampleJokes)
 
 //@ts-ignore
-let DataGen = DATACUSTOM.concat(DATASAMPLE);
+export let DataGen: Joke[] = DATACUSTOM.concat(DATASAMPLE);
 
 export function ListJokeScreen() {
     return (
