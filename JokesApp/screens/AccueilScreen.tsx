@@ -5,9 +5,10 @@ import {DataGen, ListJokeScreen} from "./ListJokeScreen";
 import React from "react";
 import {HorizontalListJokeComponent} from "../components/HorizontalListJokeComponent";
 import {ListAllCategories} from "../components/ListAllCategories";
+import {CustomJoke} from "../model/CustomJoke";
 
 let taille = DataGen.length;
-let LastJokes = DataGen.slice(taille - 16, taille);
+let LastJokes = DataGen.slice(taille - 20, taille);
 
 function filterCategory(jokes: Joke[]): String[] {
     let categories: String[] = [];
@@ -34,7 +35,7 @@ export function AccueilScreen() {
             <FlatList  showsHorizontalScrollIndicator={false} horizontal={true}
                 data={LastJokes}
                 renderItem={HorizontalListJokeComponent}
-                keyExtractor={(item: Joke) => item.summary()}
+                keyExtractor={(item: CustomJoke) => item.id.toString()}
             />
             <View style={styles.categories}>
                 <Text style={styles.titleAccueil} >Top Categories</Text>

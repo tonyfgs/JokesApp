@@ -5,6 +5,7 @@ import {Joke} from "../model/Joke";
 import {JokeFactory} from "../model/JokeFactory";
 import {JokeStub} from "../model/JokeStub";
 import {indigo, purpleColor} from "../Theme";
+import {CustomJoke} from "../model/CustomJoke";
 
 
 const DATACUSTOM = JokeFactory.createCustomJokes(JokeStub.customJokes)
@@ -19,7 +20,7 @@ export function ListJokeScreen() {
             <FlatList
                 data={DataGen}
                 renderItem={JokeListItems}
-                keyExtractor={(item: Joke) => item.summary()}
+                keyExtractor={(item: CustomJoke) => item.id.toString()}
            />
         </SafeAreaView>
     );
