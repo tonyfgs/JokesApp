@@ -1,28 +1,35 @@
 import {FlatList, Image, SafeAreaView, ScrollView, SectionListComponent, StyleSheet, Text, View} from "react-native";
 import {indigo, purpleColor} from "../Theme";
 import {Joke} from "../model/Joke";
-import {DataGen, ListJokeScreen} from "./ListJokeScreen";
-import React from "react";
+import React, {useEffect} from "react";
 import {HorizontalListJokeComponent} from "../components/HorizontalListJokeComponent";
 import {ListAllCategories} from "../components/ListAllCategories";
 import {CustomJoke} from "../model/CustomJoke";
+import {JokeFactory} from "../model/JokeFactory";
+import {JokeStub} from "../model/JokeStub";
+import {useDispatch, useSelector} from "react-redux";
+import {getLatestJokes, getSampleJoke, setRecentJokes, setSample} from "../redux/actions/sampleAction";
+import {getCategorie, setCategories} from "../redux/actions/categoriesAction";
+import {Categorie} from "../model/Categorie";
 
-let taille = DataGen.length;
-let LastJokes = DataGen.slice(taille - 20, taille);
 
-function filterCategory(jokes: Joke[]): String[] {
-    let categories: String[] = [];
-    jokes.forEach(joke => {
-        if (!categories.includes(joke.type())) {
-            categories.push(joke.type());
-        }
-    });
-    return categories;
-}
 export function AccueilScreen() {
 
-    // Permet de filtrer les types des blagues pour les afficher dans la liste des categories
-    const FiltereData = filterCategory(LastJokes);
+    const DataGen = useSelector((state: any) => state.sampleReducer.recentJokes);
+    const DataCate = useSelector((state: any) => state.categorieReducer.categories);
+    const dispatch = useDispatch();
+    useEffect(() => {
+
+        const getJokes = async () => {
+            dispatch(setRecentJokes(await getLatestJokes()));
+        };
+        getJokes();
+
+        const getTopCategories = async () => {
+            dispatch(setCategories(await getCategorie()));
+        };
+        getTopCategories();
+    }, [dispatch]);
 
     return (
         <SafeAreaView style={styles.container}>
@@ -33,7 +40,7 @@ export function AccueilScreen() {
                 <Text style={styles.titleAccueil}>Dernieres Blagues</Text>
             </View>
             <FlatList  showsHorizontalScrollIndicator={false} horizontal={true}
-                data={LastJokes}
+                data={DataGen}
                 renderItem={HorizontalListJokeComponent}
                 keyExtractor={(item: CustomJoke) => item.id.toString()}
             />
@@ -42,10 +49,9 @@ export function AccueilScreen() {
                 <Image source={require("../assets/fire_icon.png")}/>
             </View>
             <FlatList showsHorizontalScrollIndicator={false} horizontal={true}
-                      data={FiltereData}
+                      data={DataCate}
                       renderItem={ListAllCategories}
-                      keyExtractor={(item) => item.toString()}
-            />
+                      keyExtractor={(item : Categorie) => item.name}/>
         </SafeAreaView>
     );
 }

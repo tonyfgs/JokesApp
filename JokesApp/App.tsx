@@ -3,14 +3,18 @@ import React from "react";
 import {ListJokeScreen} from "./screens/ListJokeScreen";
 import {Navigation} from "./navigation/Navigation";
 import {darksalmonColor, indigo, purpleColor} from "./Theme";
+import {Provider} from "react-redux";
+import store from "./redux/store";
 
 
 export default function App() {
     return (
+        <Provider store={store}>
         <SafeAreaView style={styles.container}>
             <StatusBar barStyle="light-content" />
             <Navigation/>
         </SafeAreaView>
+        </Provider>
     );
 }
 

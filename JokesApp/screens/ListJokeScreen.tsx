@@ -1,20 +1,22 @@
 import {FlatList, SafeAreaView, StyleSheet, Text, View} from "react-native";
-import React from "react";
+import React, {useEffect} from "react";
 import {JokeListItems} from "../components/ListeJokeComponent";
-import {Joke} from "../model/Joke";
-import {JokeFactory} from "../model/JokeFactory";
-import {JokeStub} from "../model/JokeStub";
 import {indigo, purpleColor} from "../Theme";
 import {CustomJoke} from "../model/CustomJoke";
+import {useDispatch, useSelector} from 'react-redux';
+import {getLatestJokes, getSampleJoke, setSample} from "../redux/actions/sampleAction";
 
 
-const DATACUSTOM = JokeFactory.createCustomJokes(JokeStub.customJokes)
-const DATASAMPLE = JokeFactory.createSampleJokes(JokeStub.sampleJokes)
-
-//@ts-ignore
-export let DataGen: Joke[] = DATACUSTOM.concat(DATASAMPLE);
 
 export function ListJokeScreen() {
+    const DataGen = useSelector((state: any) => state.sampleReducer.sampleJoke);
+    const dispatch = useDispatch();
+    useEffect(() => {
+        const getJokes = async () => {
+            dispatch(setSample(await getSampleJoke()));
+        };
+        getJokes();
+    }, [dispatch]);
     return (
         <SafeAreaView style={styles.container}>
             <FlatList

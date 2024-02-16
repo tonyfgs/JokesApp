@@ -1,5 +1,6 @@
 import { CustomJoke } from "./CustomJoke";
 import { SampleJoke } from "./SampleJoke";
+import {Categorie} from "./Categorie";
 
 export class JokeFactory {
 
@@ -25,6 +26,4 @@ export class JokeFactory {
 
         return array;
     }
-
-
 }

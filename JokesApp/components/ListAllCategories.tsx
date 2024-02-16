@@ -1,20 +1,21 @@
 import {Joke} from "../model/Joke";
 import {Image, StyleSheet, Text, View} from "react-native";
 import React from "react";
-import {indigo} from "../Theme";
+import {greyColor, indigo} from "../Theme";
+import {Categorie} from "../model/Categorie";
 
-type JokeListItemProps = {
-    item: String;
+type ListAllCategories = {
+    item: Categorie;
 }
 
 
 
-export function ListAllCategories(props: JokeListItemProps) {
+export function ListAllCategories(props: ListAllCategories) {
 
     return (
         <View style={styles.listItem}>
                 <View style={styles.chip}>
-                    <Text>{props.item}</Text>
+                    <Text>{props.item.name}</Text>
                 </View>
         </View>
     );
@@ -30,7 +31,7 @@ const styles = StyleSheet.create({
     },
     chip: {
         borderRadius: 16,
-        backgroundColor: 'rgba(140, 140, 161, 1)',
+        backgroundColor: greyColor,
         padding: 5,
         marginTop: 5,
         alignSelf: 'flex-start',
