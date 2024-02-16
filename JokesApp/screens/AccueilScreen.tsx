@@ -21,11 +21,13 @@ export function AccueilScreen() {
     useEffect(() => {
 
         const getJokes = async () => {
+            // @ts-ignore
             dispatch(setRecentJokes(await getLatestJokes()));
         };
         getJokes();
 
         const getTopCategories = async () => {
+            // @ts-ignore
             dispatch(setCategories(await getCategorie()));
         };
         getTopCategories();

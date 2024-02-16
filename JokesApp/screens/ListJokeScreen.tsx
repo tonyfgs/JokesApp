@@ -13,6 +13,7 @@ export function ListJokeScreen() {
     const dispatch = useDispatch();
     useEffect(() => {
         const getJokes = async () => {
+            // @ts-ignore
             dispatch(setSample(await getSampleJoke()));
         };
         getJokes();
