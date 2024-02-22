@@ -7,11 +7,13 @@ interface state {
     recentJokes: SampleJoke[];
 }
 
+// initial state for sampleJokes
 const initialState: state = {
     sampleJoke: [],
     recentJokes: [],
 }
 
+// app reducer for sampleJokes
 // @ts-ignore
 export default appReducer = (state = initialState, action: Action) => {
     switch (action.type) {

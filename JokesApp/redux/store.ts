@@ -7,6 +7,7 @@ const reducer = {
     sampleReducer: sampleReducer
 };
 
+
 // @ts-ignore
 const store = configureStore({
     // @ts-ignore

@@ -5,9 +5,13 @@ interface State {
     categories: Categorie[];
 }
 
+
+// initial state for categories
 const initialState: State = {
     categories: [],
 }
+
+// app reducer for categories
 // @ts-ignore
 export default appReducer = (state = initialState, action: Action) => {
     switch (action.type) {
