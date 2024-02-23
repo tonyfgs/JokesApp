@@ -5,12 +5,14 @@ import {Action, SampleActionType} from "../actions/sampleAction";
 interface state {
     sampleJoke: SampleJoke[];
     recentJokes: SampleJoke[];
+    completJoke: SampleJoke;
 }
 
 // initial state for sampleJokes
 const initialState: state = {
+    completJoke: {} as SampleJoke,
     sampleJoke: [],
-    recentJokes: [],
+    recentJokes: []
 }
 
 // app reducer for sampleJokes
@@ -26,6 +28,11 @@ export default appReducer = (state = initialState, action: Action) => {
             return {
                 ...state,
                 recentJokes: action.payload
+            }
+        case SampleActionType.FECTH_COMPLET_JOKE:
+            return {
+                ...state,
+                completJoke: action.payload,
             }
 
         default:

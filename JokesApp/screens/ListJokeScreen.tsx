@@ -1,14 +1,12 @@
-import {FlatList, SafeAreaView, StyleSheet, Text, View} from "react-native";
+import {FlatList, SafeAreaView, StyleSheet, Text, TouchableHighlight, View} from "react-native";
 import React, {useEffect} from "react";
 import {JokeListItems} from "../components/ListeJokeComponent";
 import {indigo, purpleColor} from "../Theme";
 import {CustomJoke} from "../model/CustomJoke";
 import {useDispatch, useSelector} from 'react-redux';
-import {getLatestJokes, getSampleJoke, setSample} from "../redux/actions/sampleAction";
+import {getSampleJoke, setSample} from "../redux/actions/sampleAction";
 
-
-
-export function ListJokeScreen() {
+export function ListJokeScreen({route, navigation}) {
     const DataGen = useSelector((state: any) => state.sampleReducer.sampleJoke);
     const dispatch = useDispatch();
     useEffect(() => {
@@ -22,13 +20,16 @@ export function ListJokeScreen() {
         <SafeAreaView style={styles.container}>
             <FlatList
                 data={DataGen}
-                renderItem={JokeListItems}
-                keyExtractor={(item: CustomJoke) => item.id.toString()}
-           />
+                renderItem={({ item }) => (
+                    <TouchableHighlight onPress={() => navigation.navigate("JokeDetail", {"joke" : item.id})}>
+                        <JokeListItems item={item}/>
+                    </TouchableHighlight>
+                )}
+                keyExtractor={(item:  CustomJoke) => item.id.toString()}
+            />
         </SafeAreaView>
     );
 }
-
 
 const styles = StyleSheet.create({
 
@@ -52,6 +53,4 @@ const styles = StyleSheet.create({
     top: {
         backgroundColor : indigo,
     },
-
-
 });

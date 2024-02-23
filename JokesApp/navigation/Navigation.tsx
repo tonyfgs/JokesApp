@@ -7,6 +7,8 @@ import {darksalmonColor, greyColor, indigo, purpleColor} from "../Theme";
 import {AccueilScreen} from "../screens/AccueilScreen";
 import {AddJokeScreen} from "../screens/AddJokeScreen";
 import {SettingsScreen} from "../screens/SettingsScreen";
+import {JokeListItems} from "../components/ListeJokeComponent";
+import StackNavigation from "./StackNavigation";
 const homeIcon = require("../assets/home_icon.png");
 const listIcon = require("../assets/list_icon.png");
 const addIcon = require("../assets/add_icon.png");
@@ -39,7 +41,7 @@ export function Navigation(){
                                                    />
                                                )
                                            }}/>
-                <BottomTabNavigator.Screen name="Catalogue" component={ListJokeScreen}
+                <BottomTabNavigator.Screen name="Catalogue" component={StackNavigation}
                                            options={{
                                                tabBarIcon: ({focused}) => (
                                                    <Image source={listIcon}
@@ -74,7 +76,6 @@ export function Navigation(){
                                                    />
                                                )
                                            }}/>
-
             </BottomTabNavigator.Navigator>
         </NavigationContainer>
     )
@@ -90,7 +91,7 @@ const styles = StyleSheet.create({
         marginVertical: 20,
     },
     top: {
-        backgroundColor : "rgba(14, 14, 44, 1)"
+        backgroundColor : indigo
     },
     addJoke: {
         flex: 1,

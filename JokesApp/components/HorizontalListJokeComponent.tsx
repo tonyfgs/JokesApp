@@ -17,7 +17,7 @@ export function HorizontalListJokeComponent(props: JokeListItemProps) {
                 uri: props.item.image}}/>
             <View style={styles.contentList}>
                 <Text style={styles.titleResume}>Résumé de la blague</Text>
-                <Text style={styles.contentSummary}>{props.item.summary()}</Text>
+                <Text style={styles.contentSummary}>{props.item.summary}</Text>
 
             </View>
         </View>

@@ -15,9 +15,9 @@ export function JokeListItems(props: JokeListItemProps) {
                 uri: props.item.image}}/>
             <View style={styles.contentList}>
                 <Text style={styles.titleResume}>Résumé de la blague</Text>
-                <Text style={styles.contentSummary}>{props.item.summary()}</Text>
+                <Text style={styles.contentSummary}>{props.item.summary}</Text>
                 <View style={styles.chip}>
-                    <Text >Type : {props.item.type()}</Text>
+                    <Text >Type : {props.item.type}</Text>
                 </View>
             </View>
         </View>

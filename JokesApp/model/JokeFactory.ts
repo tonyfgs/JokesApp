@@ -26,4 +26,13 @@ export class JokeFactory {
 
         return array;
     }
+
+    static createSampleJokeById(jsonArray: string): SampleJoke {
+        let array = [];
+        let json = JSON.parse(jsonArray);
+        return new SampleJoke(json.type, json.setup, json.punchline,json.image, json.id)
+        //json.forEach(function (joke) {
+           // array.push(new SampleJoke(joke.type, joke.setup, joke.image,joke.punchline, joke.id));
+        //})
+    }
 }
