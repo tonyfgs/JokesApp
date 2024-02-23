@@ -1,5 +1,5 @@
 import {View, Text, StyleSheet} from "react-native";
-import {indigo, purpleColor} from "../Theme";
+import {indigo, purpleColor, whiteColor} from "../Theme";
 import React, {useEffect} from "react";
 import {CustomJoke} from "../model/CustomJoke";
 import {DetailJoke} from "../components/DetailJoke";
@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
         backgroundColor: purpleColor,
         width: '100%',
         height: '100%',
+
     },
     text: {
         fontSize: 24,

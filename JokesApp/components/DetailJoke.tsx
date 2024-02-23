@@ -63,6 +63,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         borderColor: whiteColor,
         backgroundColor : indigo,
+        borderWidth: 1,
     },
     imageSettings: {
         flex: 1,
@@ -77,7 +78,7 @@ const styles = StyleSheet.create({
     },
     chip: {
         borderRadius: 16,
-        backgroundColor: greyColor,
+        backgroundColor: whiteColor,
         padding: 5,
         margin: 5,
         marginLeft: 30,

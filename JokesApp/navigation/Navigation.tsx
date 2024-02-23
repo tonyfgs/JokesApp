@@ -47,7 +47,8 @@ export function Navigation(){
                                                    <Image source={listIcon}
                                                           style={{ tintColor: focused ? darksalmonColor : purpleColor }}
                                                    />
-                                               )
+                                               ),
+                                               headerShown: false,
                                            }}/>
                 <BottomTabNavigator.Screen name="Ajouter" component={AddJokeScreen}
                                            options={{
@@ -57,7 +58,8 @@ export function Navigation(){
                                                               style={{ tintColor: focused ? darksalmonColor : purpleColor }}
                                                        />
                                                    </View>
-                                               )
+                                               ),
+
                                            }}/>
 
                 <BottomTabNavigator.Screen name="Favoris" component={ListJokeScreen}
