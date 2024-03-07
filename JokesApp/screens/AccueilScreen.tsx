@@ -22,7 +22,7 @@ export function AccueilScreen() {
 
         const getJokes = async () => {
             // @ts-ignore
-            dispatch(setRecentJokes(await getLatestJokes()));
+            await dispatch(getLatestJokes());
         };
         getJokes();
 

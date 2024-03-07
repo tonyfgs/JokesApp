@@ -42,27 +42,30 @@ export const setCompletJokes = (completJoke: SampleJoke): SampleActionComplet =>
     }
 }
 
-export const getSampleJoke = async() : Promise<SampleJoke[]> => {
+export const getSampleJoke = () => {
+    return async dispatch => {
         try {
             const sample = await fetch('https://iut-weather-api.azurewebsites.net/jokes/samples');
             const sampleJson = await sample.text();
-            return JokeFactory.createSampleJokes(sampleJson);
-        }
-        catch (error) {
+            const joke = JokeFactory.createSampleJokes(sampleJson);
+            dispatch(setSample(joke));
+        } catch (error) {
             console.log('Error---------', error);
         }
+    }
 }
 
-export const getLatestJokes = async() : Promise<SampleJoke[]> => {
-    try {
-        const sample = await fetch('https://iut-weather-api.azurewebsites.net/jokes/lasts');
-        const sampleJson = await sample.text();
-        return JokeFactory.createSampleJokes(sampleJson);
+export const getLatestJokes = () => {
+    return async dispatch => {
+        try {
+            const sample = await fetch('https://iut-weather-api.azurewebsites.net/jokes/lasts');
+            const sampleJson = await sample.text();
+            const latestJoke = JokeFactory.createSampleJokes(sampleJson);
+            dispatch(setRecentJokes(latestJoke));
+        } catch (error) {
+            console.log('Error---------', error);
+        }
     }
-    catch (error) {
-        console.log('Error---------', error);
-    }
-
 }
 
 export const getCompletJokes = (id : number) => {
@@ -71,7 +74,6 @@ export const getCompletJokes = (id : number) => {
             const sample = await fetch('https://iut-weather-api.azurewebsites.net/jokes/samples/' + id);
             const sampleJson = await sample.text();
             const jokeSelect = JokeFactory.createSampleJokeById(sampleJson);
-            console.log("edsv" + jokeSelect);
             dispatch(setCompletJokes(jokeSelect))
         } catch (error) {
             console.log('Error---------', error);

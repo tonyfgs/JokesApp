@@ -12,7 +12,7 @@ export function ListJokeScreen({route, navigation}) {
     useEffect(() => {
         const getJokes = async () => {
             // @ts-ignore
-            dispatch(setSample(await getSampleJoke()));
+            await dispatch(getSampleJoke());
         };
         getJokes();
     }, [dispatch]);
