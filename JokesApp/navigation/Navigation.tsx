@@ -32,7 +32,7 @@ export function Navigation(){
                 tabBarShowLabel: false,
                 tabBarStyle: styles.top,
             }}  >
-                <BottomTabNavigator.Screen name="Accueil" component={AccueilScreen}
+                <BottomTabNavigator.Screen name="Accueil" component={AddJokeScreen}
                                            options={{
                                                tabBarIcon: ({focused}) => (
                                                    <Image

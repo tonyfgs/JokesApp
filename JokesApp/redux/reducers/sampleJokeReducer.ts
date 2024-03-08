@@ -1,18 +1,21 @@
 import {SampleJoke} from "../../model/SampleJoke";
 import {Action, SampleActionType} from "../actions/sampleAction";
+import {CustomJoke} from "../../model/CustomJoke";
 
 
 interface state {
     sampleJoke: SampleJoke[];
     recentJokes: SampleJoke[];
     completJoke: SampleJoke;
+    postJoke: CustomJoke;
 }
 
 // initial state for sampleJokes
 const initialState: state = {
     completJoke: {} as SampleJoke,
     sampleJoke: [],
-    recentJokes: []
+    recentJokes: [],
+    postJoke: {} as CustomJoke,
 }
 
 // app reducer for sampleJokes
@@ -33,6 +36,11 @@ export default appReducer = (state = initialState, action: Action) => {
             return {
                 ...state,
                 completJoke: action.payload,
+            }
+        case SampleActionType.POST_CUSTOM_JOKE:
+            return {
+                ...state,
+                postJoke: action.payload,
             }
 
         default:
