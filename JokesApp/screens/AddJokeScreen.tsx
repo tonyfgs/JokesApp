@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Button, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { darksalmonColor, indigo, purpleColor, whiteColor } from "../Theme";
 import { useDispatch, useSelector } from "react-redux";
-import { getSampleJoke, postJoke } from "../redux/actions/sampleAction";
+import { postJoke} from "../redux/actions/customAction";
 
 export function AddJokeScreen() {
     const [joke, setJoke] = useState("");
     const [jokeFall, setJokeFall] = useState("");
     const [category, setCategory] = useState("");
     const [categoryExceeded, setCategoryExceeded] = useState(false);
-    const [buttonDisabled, setButtonDisabled] = useState(true); // État pour activer/désactiver le bouton "CRÉER"
+    const [buttonDisabled, setButtonDisabled] = useState(true);
     const MAX_CATEGORY_LENGTH = 10;
     const dispatch = useDispatch();
 

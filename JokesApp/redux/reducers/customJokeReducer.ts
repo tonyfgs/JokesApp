@@ -1,21 +1,15 @@
 import {SampleJoke} from "../../model/SampleJoke";
-import {Action, SampleActionType} from "../actions/sampleAction";
 import {CustomJoke} from "../../model/CustomJoke";
+import {CustomActionType} from "../actions/customAction";
 
 
 interface state {
-    sampleJoke: SampleJoke[];
-    recentJokes: SampleJoke[];
-    completJoke: SampleJoke;
     postJoke: CustomJoke;
     customJokes: CustomJoke[];
 }
 
 // initial state for sampleJokes
 const initialState: state = {
-    completJoke: {} as SampleJoke,
-    sampleJoke: [],
-    recentJokes: [],
     postJoke: {} as CustomJoke,
     customJokes: [],
 }
@@ -24,22 +18,16 @@ const initialState: state = {
 // @ts-ignore
 export default appReducer = (state = initialState, action: Action) => {
     switch (action.type) {
-        case SampleActionType.FETCH_SAMPLE:
+        case CustomActionType.POST_CUSTOM_JOKE:
             return {
                 ...state,
-                sampleJoke: action.payload
+                postJoke: action.payload,
             }
-        case SampleActionType.FECTH_LAST_JOKES:
+        case CustomActionType.FETCH_CUSTOMS_JOKE:
             return {
                 ...state,
-                recentJokes: action.payload
+                customJokes: action.payload,
             }
-        case SampleActionType.FECTH_COMPLET_JOKE:
-            return {
-                ...state,
-                completJoke: action.payload,
-            }
-
 
         default:
             return state;

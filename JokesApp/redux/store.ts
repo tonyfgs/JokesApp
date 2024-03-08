@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import categorieReducer from './reducers/categoryReducer';
 import sampleReducer from './reducers/sampleJokeReducer';
+import customReducer from "./reducers/customJokeReducer";
 
 const reducer = {
     categorieReducer: categorieReducer,
-    sampleReducer: sampleReducer
+    sampleReducer: sampleReducer,
+    customReducer: customReducer
 };
 
 
