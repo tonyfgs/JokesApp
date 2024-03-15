@@ -7,8 +7,6 @@ interface state {
     sampleJoke: SampleJoke[];
     recentJokes: SampleJoke[];
     completJoke: SampleJoke;
-    postJoke: CustomJoke;
-    customJokes: CustomJoke[];
 }
 
 // initial state for sampleJokes
@@ -16,8 +14,6 @@ const initialState: state = {
     completJoke: {} as SampleJoke,
     sampleJoke: [],
     recentJokes: [],
-    postJoke: {} as CustomJoke,
-    customJokes: [],
 }
 
 // app reducer for sampleJokes

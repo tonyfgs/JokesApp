@@ -6,12 +6,14 @@ import {CustomActionType} from "../actions/customAction";
 interface state {
     postJoke: CustomJoke;
     customJokes: CustomJoke[];
+    completCustomJoke: CustomJoke;
 }
 
 // initial state for sampleJokes
 const initialState: state = {
     postJoke: {} as CustomJoke,
     customJokes: [],
+    completCustomJoke: {} as CustomJoke,
 }
 
 // app reducer for sampleJokes
@@ -27,6 +29,11 @@ export default appReducer = (state = initialState, action: Action) => {
             return {
                 ...state,
                 customJokes: action.payload,
+            }
+        case CustomActionType.FETCH_CUSTOMS_JOKE_BY_ID:
+            return {
+                ...state,
+                completCustomJoke: action.payload,
             }
 
         default:

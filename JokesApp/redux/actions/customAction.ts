@@ -4,6 +4,7 @@ import {JokeFactory} from "../../model/JokeFactory";
 export enum CustomActionType {
     POST_CUSTOM_JOKE = 'POST_CUSTOM_JOKE',
     FETCH_CUSTOMS_JOKE = 'FETCH_CUSTOMS_JOKE',
+    FETCH_CUSTOMS_JOKE_BY_ID = 'FETCH_CUSTOMS_JOKE_BY_ID',
 }
 
 export interface CustomAction {
@@ -38,6 +39,14 @@ export const setCustomsJoke = (customJokes: CustomJoke[]): CustomsAction => {
     }
 }
 
+export const setCustomsJokeById = (completCustomJoke: CustomJoke): postCustomAction => {
+    return {
+        type: CustomActionType.FETCH_CUSTOMS_JOKE_BY_ID,
+        payload: completCustomJoke
+    }
+
+}
+
 
 
 export const postJoke = (type : string, setup : string, punchline : string) => {
@@ -69,16 +78,24 @@ export const postJoke = (type : string, setup : string, punchline : string) => {
 export const getJokesCustoms = () => {
     return async dispatch => {
         try {
-            const custom = await fetch('https://iut-weather-api.azurewebsites.net/jokes/', {
-                method: 'GET',
-                headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
-                },
-            });
+            const custom = await fetch('https://iut-weather-api.azurewebsites.net/jokes/');
             const customsJson = await custom.text();
             const customJokes = JokeFactory.createCustomJokes(customsJson);
             dispatch(setCustomsJoke(customJokes));
+        } catch (error) {
+            console.log('Error---------', error);
+        }
+    }
+}
+
+export const getJokesCustomsById = (id : number) => {
+    return async dispatch => {
+        try {
+            const custom = await fetch('https://iut-weather-api.azurewebsites.net/jokes/' + id);
+            const customsJson = await custom.text();
+            const customJokes = JokeFactory.createCustomJokeById(customsJson);
+            console.log('customJokes', customJokes);
+            dispatch(setCustomsJokeById(customJokes));
         } catch (error) {
             console.log('Error---------', error);
         }

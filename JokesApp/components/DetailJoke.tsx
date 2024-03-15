@@ -3,9 +3,10 @@ import {darksalmonColor, greyColor, indigo, purpleColor, whiteColor} from "../Th
 import React, {useState} from "react";
 import {SampleJoke} from "../model/SampleJoke";
 import {Joke} from "../model/Joke";
+import {CustomJoke} from "../model/CustomJoke";
 
 type DetailJokeProps = {
-    item: SampleJoke;
+    item: CustomJoke;
 }
 
 

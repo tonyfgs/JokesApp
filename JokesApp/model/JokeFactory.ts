@@ -35,4 +35,11 @@ export class JokeFactory {
            // array.push(new SampleJoke(joke.type, joke.setup, joke.image,joke.punchline, joke.id));
         //})
     }
+
+    static createCustomJokeById(jsonArray: string): CustomJoke {
+        let array = [];
+        let json = JSON.parse(jsonArray);
+        return new CustomJoke(json.type, json.setup, json.punchline,json.image, json.id)
+    }
+
 }
