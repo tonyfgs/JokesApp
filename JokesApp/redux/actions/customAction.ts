@@ -5,6 +5,7 @@ export enum CustomActionType {
     POST_CUSTOM_JOKE = 'POST_CUSTOM_JOKE',
     FETCH_CUSTOMS_JOKE = 'FETCH_CUSTOMS_JOKE',
     FETCH_CUSTOMS_JOKE_BY_ID = 'FETCH_CUSTOMS_JOKE_BY_ID',
+    DELETE_CUSTOM_JOKE = 'DELETE_CUSTOM_JOKE',
 }
 
 export interface CustomAction {
@@ -45,6 +46,13 @@ export const setCustomsJokeById = (completCustomJoke: CustomJoke): postCustomAct
         payload: completCustomJoke
     }
 
+}
+
+export const setDeleteCustomJoke = (deleteCustomJoke: CustomJoke): postCustomAction => {
+    return {
+        type: CustomActionType.DELETE_CUSTOM_JOKE,
+        payload: deleteCustomJoke
+    }
 }
 
 
@@ -96,6 +104,24 @@ export const getJokesCustomsById = (id : number) => {
             const customJokes = JokeFactory.createCustomJokeById(customsJson);
             console.log('customJokes', customJokes);
             dispatch(setCustomsJokeById(customJokes));
+        } catch (error) {
+            console.log('Error---------', error);
+        }
+    }
+}
+
+export const deleteJoke = (id : number) => {
+    return async dispatch => {
+        try {
+            const custom = await fetch('https://iut-weather-api.azurewebsites.net/jokes/' + id, {
+                method: 'DELETE',
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                }
+            });
+            console.log('Suppression');
+            dispatch(setDeleteCustomJoke({} as CustomJoke));
         } catch (error) {
             console.log('Error---------', error);
         }

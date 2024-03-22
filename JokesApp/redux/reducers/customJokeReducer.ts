@@ -7,6 +7,7 @@ interface state {
     postJoke: CustomJoke;
     customJokes: CustomJoke[];
     completCustomJoke: CustomJoke;
+    deleteCustomJoke: CustomJoke;
 }
 
 // initial state for sampleJokes
@@ -14,6 +15,7 @@ const initialState: state = {
     postJoke: {} as CustomJoke,
     customJokes: [],
     completCustomJoke: {} as CustomJoke,
+    deleteCustomJoke: {} as CustomJoke,
 }
 
 // app reducer for sampleJokes
@@ -34,6 +36,11 @@ export default appReducer = (state = initialState, action: Action) => {
             return {
                 ...state,
                 completCustomJoke: action.payload,
+            }
+        case CustomActionType.DELETE_CUSTOM_JOKE:
+            return {
+                ...state,
+                deleteCustomJoke: action.payload,
             }
 
         default:
