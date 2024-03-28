@@ -15,10 +15,12 @@ export interface SampleAction {
 export interface SampleActionComplet {
     type: SampleActionType;
     payload: SampleJoke;
-
 }
 
 export type Action = SampleAction;
+
+
+
 
 
 export const setSample = (sample: SampleJoke[]): SampleAction => {
@@ -41,6 +43,9 @@ export const setCompletJokes = (completJoke: SampleJoke): SampleActionComplet =>
         payload: completJoke
     }
 }
+
+
+
 
 export const getSampleJoke = () => {
     return async dispatch => {
