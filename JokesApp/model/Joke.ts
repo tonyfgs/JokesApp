@@ -12,7 +12,7 @@ export abstract class Joke{
         this._punchline = punchline
         this._image = image
     }
-    public type(): string {
+    public get type(): string {
         return this._type;
     }
 
@@ -29,13 +29,13 @@ export abstract class Joke{
     }
 
     // Permet d'afficher les 25 premiers caractères du contexte de la blague suivis de ...
-    public summary():string{
+    public get summary():string{
         return this.setup.substring(0,25) + ' ...'
     }
 
     // Permet de retourner le type d'une blague + sont contexte
-    public description():string{
-        return this.type() + ' - ' +this.summary()
+    public get description():string{
+        return this.type + ' : ' + this.setup
     }
 
 
