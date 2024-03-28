@@ -1,9 +1,9 @@
-import React from "react";
-import {NavigationContainer} from "@react-navigation/native";
+import React, {useContext, useEffect, useState} from "react";
+import {DarkTheme, DefaultTheme, NavigationContainer, Theme, useTheme} from "@react-navigation/native";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {ListJokeScreen} from "../screens/ListJokeScreen";
-import {Image, StyleSheet, View} from "react-native";
-import {darksalmonColor, greyColor, indigo, purpleColor} from "../Theme";
+import {Image, StyleSheet, useColorScheme, View} from "react-native";
+import usePersonalTheme, {darksalmonColor, greyColor, indigo, purpleColor} from "../Theme";
 import {AccueilScreen} from "../screens/AccueilScreen";
 import {AddJokeScreen} from "../screens/AddJokeScreen";
 import {SettingsScreen} from "../screens/SettingsScreen";
@@ -14,24 +14,46 @@ const listIcon = require("../assets/list_icon.png");
 const addIcon = require("../assets/add_icon.png");
 const favIcon = require("../assets/favorite_icon.png");
 const setIcon = require("../assets/settings_icon.png");
+import store, {getTheme, storeTheme} from "../redux/store";
 
 
 export function Navigation(){
+
+
     const BottomTabNavigator = createBottomTabNavigator();
+
+    const [themes, setThemes] = useState<Theme | null>(null);
+
+    useEffect(() => {
+        const fetchTheme = async () => {
+            const theme = await getTheme();
+            setThemes(theme);
+        };
+
+        fetchTheme();
+    });
+
+    if (themes == null) {
+        return null;
+    }
+
+    console.log("ici le theme", themes);
+
+
     return (
-        <NavigationContainer>
-            <BottomTabNavigator.Navigator initialRouteName="Home" screenOptions={{
+        <NavigationContainer  theme={ themes.dark === false ? DefaultTheme :  DarkTheme} >
+            <BottomTabNavigator.Navigator initialRouteName="Home"  screenOptions={{
                 headerTitleStyle: {
                     fontSize: 24,
                     fontWeight: 'bold',
-                    color: darksalmonColor,
+                    color: themes.colors.text,
                 },
                 headerStyle: {
                     backgroundColor: indigo,
                 },
                 tabBarShowLabel: false,
                 tabBarStyle: styles.top,
-            }}  >
+            }}>
                 <BottomTabNavigator.Screen name="Accueil" component={AccueilScreen}
                                            options={{
                                                tabBarIcon: ({focused}) => (
@@ -84,6 +106,33 @@ export function Navigation(){
 }
 
 const styles = StyleSheet.create({
+
+    title: {
+        fontSize: 24,
+        color: 'darksalmon',
+        textAlign: 'center',
+        fontWeight: 'bold',
+        marginVertical: 20,
+    },
+    top: {
+        backgroundColor : indigo
+    },
+    addJoke: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: greyColor,
+        width: '70%',
+        height: '100%',
+        borderRadius: 4,
+        marginTop: 4,
+    },
+
+
+});
+
+
+const stylesDark = StyleSheet.create({
 
     title: {
         fontSize: 24,
