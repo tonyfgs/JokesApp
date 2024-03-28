@@ -4,6 +4,7 @@ import React, {useState} from "react";
 import {SampleJoke} from "../model/SampleJoke";
 import {Joke} from "../model/Joke";
 import {CustomJoke} from "../model/CustomJoke";
+import {storeFavoriteJoke} from "../redux/store";
 
 type DetailJokeProps = {
     item: CustomJoke;
@@ -17,6 +18,14 @@ export function DetailJoke(props: DetailJokeProps) {
 
     function toggleActivation() {
         setIsActivated(!isActivated);
+        if (isActivated) {
+            console.log("Joke retirée des favoris");
+            //removeFavoriteJoke();
+        }
+        else {
+            console.log("Joke ajoutée aux favoris");
+            storeFavoriteJoke(props.item)
+        }
     }
 
 
