@@ -26,12 +26,9 @@ export function DetailJoke(props: DetailJokeProps) {
             //removeFavoriteJoke();
         }
         else {
-            if (props.item === undefined) {
-                console.log("Joke undefined");
-                return;
-            }
+            dispatch(storeFavoriteJoke(props.item));
             console.log("Joke ajoutée aux favoris");
-            storeFavoriteJoke(props.item);        }
+        }
     }
 
 

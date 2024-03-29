@@ -46,19 +46,21 @@ export const getTheme = async () => {
     }
 }
 
-export const storeFavoriteJoke =async (joke) => {
-    try {
-        const jsonValue = await AsyncStorage.getItem('@favorite')
-        let favoriteJokes = jsonValue != null ? JSON.parse(jsonValue) as CustomJoke[] : [];
-        favoriteJokes.push(joke);
-        const updatedJsonValue = JSON.stringify(favoriteJokes);
-        await AsyncStorage.setItem('@favorite', updatedJsonValue);
-        const length = favoriteJokes.length;
-        console.log( "Leght" +  length);
-        console.log("favorite stored");
-    }
-    catch (e) {
-        console.log(e);
+export const storeFavoriteJoke = (joke : CustomJoke) => {
+    return async dispatch => {
+        try {
+            const favoriteJokes = await AsyncStorage.getItem('favorites');
+            const favoriteJokesList = favoriteJokes != null ? JSON.parse(favoriteJokes) : [];
+            favoriteJokesList.push(joke);
+            await AsyncStorage.setItem('favorites', JSON.stringify(favoriteJokesList));
+            const favorites = favoriteJokesList.map(joke => new SampleJoke(joke["type"], joke["setup"], joke["punchline"], joke["image"], joke["id"]))
+            dispatch(setFavoriteJoke(favorites));
+            const length = favoriteJokes.length;
+            console.log("Leght" + length);
+            console.log("favorite stored");
+        } catch (e) {
+            console.log(e);
+        }
     }
 }
 
@@ -69,7 +71,8 @@ export const getFavorite = () => {
             let favoriteJokesList = favoriteJokes != null ? JSON.parse(favoriteJokes) : [];
             favoriteJokesList = favoriteJokesList.filter(joke => joke.id !== undefined);
             await AsyncStorage.setItem('favorites', JSON.stringify(favoriteJokesList));
-            dispatch(setFavoriteJoke(favoriteJokesList));
+            const favorites = favoriteJokesList.map(joke => new SampleJoke(joke["type"], joke["setup"], joke["punchline"], joke["image"], joke["id"]))
+            dispatch(setFavoriteJoke(favorites));
         } catch (e) {
             console.log(e);
         }
@@ -77,19 +80,11 @@ export const getFavorite = () => {
 }
 
 export const removeFavoriteJoke =  (joke) => {
-    return async (dispatch) => {
+    return async dispatch => {
         try {
-            const jsonValue = await AsyncStorage.getItem('@favorite')
-            let favoriteJokes = jsonValue != null ? JSON.parse(jsonValue) : [];
-            const index = favoriteJokes.indexOf(joke);
-            if (index > -1) {
-                favoriteJokes.splice(index, 1);
-            }
-            const updatedJsonValue = JSON.stringify(favoriteJokes);
-            AsyncStorage.setItem('@favorite', updatedJsonValue);
-            console.log("favorite removed");
+            await AsyncStorage.clear()
         } catch (e) {
-            console.log(e);
+            console.log("An error occurred", e);
         }
     }
 }

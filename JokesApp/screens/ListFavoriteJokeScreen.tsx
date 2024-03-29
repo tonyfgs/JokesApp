@@ -14,8 +14,6 @@ export function ListFavoriteJokeScreen({route, navigation}){
     const dispatch = useDispatch();
 
     useEffect(() => {
-
-
         const getFavoriteJokes = async () => {
             // @ts-ignore
             await dispatch(getFavorite());
@@ -31,6 +29,7 @@ export function ListFavoriteJokeScreen({route, navigation}){
     }
     console.log(fav);
     console.log(favoriteJokes.length);
+    console.log(favoriteJokes[1].id);
     const styles = themeSettings();
 
     return (
