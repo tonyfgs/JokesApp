@@ -3,7 +3,7 @@ import categorieReducer from './reducers/categoryReducer';
 import sampleReducer from './reducers/sampleJokeReducer';
 import customReducer from "./reducers/customJokeReducer";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {Theme} from "@react-navigation/native";
+import {DefaultTheme, Theme} from "@react-navigation/native";
 import {CustomJoke} from "../model/CustomJoke";
 import {setFavoriteJoke} from "./actions/customAction";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
@@ -40,13 +40,13 @@ export const storeTheme = async (theme) => {
 export const getTheme = async () => {
     try {
         const jsonValue = await AsyncStorage.getItem('@theme')
-        return jsonValue != null ? JSON.parse(jsonValue) as Theme : null;
+        return jsonValue != null ? JSON.parse(jsonValue) as Theme : DefaultTheme;
     } catch(e) {
         console.log(e);
     }
 }
 
-export const storeFavoriteJoke = (joke : CustomJoke) => {
+export const storeFavoriteJoke = (joke : Joke) => {
     return async dispatch => {
         try {
             const favoriteJokes = await AsyncStorage.getItem('favorites');
@@ -55,9 +55,6 @@ export const storeFavoriteJoke = (joke : CustomJoke) => {
             await AsyncStorage.setItem('favorites', JSON.stringify(favoriteJokesList));
             const favorites = favoriteJokesList.map(joke => new SampleJoke(joke["type"], joke["setup"], joke["punchline"], joke["image"], joke["id"]))
             dispatch(setFavoriteJoke(favorites));
-            const length = favoriteJokes.length;
-            console.log("Leght" + length);
-            console.log("favorite stored");
         } catch (e) {
             console.log(e);
         }
@@ -79,7 +76,7 @@ export const getFavorite = () => {
     }
 }
 
-export const removeFavoriteJoke =  (joke) => {
+export const removeFavoriteJoke =  () => {
     return async dispatch => {
         try {
             await AsyncStorage.clear()

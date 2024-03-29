@@ -4,7 +4,7 @@ import React, {useState} from "react";
 import {SampleJoke} from "../model/SampleJoke";
 import {Joke} from "../model/Joke";
 import {CustomJoke} from "../model/CustomJoke";
-import {storeFavoriteJoke, useAppDispatch, useAppSelector} from "../redux/store";
+import {removeFavoriteJoke, storeFavoriteJoke, useAppDispatch, useAppSelector} from "../redux/store";
 
 type DetailJokeProps = {
     item: CustomJoke;
@@ -23,7 +23,7 @@ export function DetailJoke(props: DetailJokeProps) {
         setIsActivated(!isActivated);
         if (isActivated) {
             console.log("Joke retirée des favoris");
-            //removeFavoriteJoke();
+            dispatch(removeFavoriteJoke());
         }
         else {
             dispatch(storeFavoriteJoke(props.item));
