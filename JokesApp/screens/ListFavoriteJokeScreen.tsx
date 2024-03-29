@@ -2,40 +2,53 @@ import {useTheme} from "@react-navigation/native";
 import {darksalmonColor, indigo, whiteColor} from "../Theme";
 import React, {useEffect, useState} from "react";
 import {getFavorite} from "../redux/store";
-import {FlatList, SafeAreaView, StyleSheet, TouchableHighlight} from "react-native";
+import {FlatList, SafeAreaView, StyleSheet, TouchableHighlight, View, Text} from "react-native";
 import {JokeListItems} from "../components/ListeJokeComponent";
 import {CustomJoke} from "../model/CustomJoke";
+import {SampleJoke} from "../model/SampleJoke";
+import {useAppSelector, useAppDispatch} from "../redux/store";
+import {useDispatch} from "react-redux";
+export function ListFavoriteJokeScreen({route, navigation}){
 
-export function ListFavoriteJokeScreen({route, navigation}) {
-    const [favoriteJokes, setFavoriteJokes] = useState<CustomJoke[]>([]);
+    const favoriteJokes = useAppSelector((state) => state.customReducer.favoriteJokes);
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        const fetchFav = async () => {
-            const jokes = await getFavorite();
-            if (jokes) {
-                setFavoriteJokes(jokes);
-            } else {
-                // Gérer le cas où aucun favori n'est retourné
-                setFavoriteJokes([]);
-            }
-        }
-        fetchFav();
-    }, []);
 
+
+        const getFavoriteJokes = async () => {
+            // @ts-ignore
+            await dispatch(getFavorite());
+        }
+        getFavoriteJokes();
+    }, []);
+    let fav = true;
+    if (favoriteJokes.length === 0) {
+         fav = false;
+    }
+    else {
+         fav = true;
+    }
+    console.log(fav);
+    console.log(favoriteJokes.length);
     const styles = themeSettings();
-    console.log("Ceci est ma taille"+favoriteJokes.length);
 
     return (
         <SafeAreaView style={styles.container}>
-            <FlatList
-                data = {favoriteJokes}
-                renderItem={({ item }) => (
-                    <TouchableHighlight onPress={() => navigation.navigate("JokeDetail", {"joke" : item.id})}>
-                        <JokeListItems item={item}/>
-                    </TouchableHighlight>
-                )}
-                keyExtractor={(item:  CustomJoke) => item.id}
-            />
+            { fav ? (
+                <FlatList
+                    data = {favoriteJokes}
+                    renderItem={({ item }) => (
+                        <TouchableHighlight onPress={() => navigation.navigate("JokeDetail", {"joke" : item.id})}>
+                            <JokeListItems item={item}/>
+                        </TouchableHighlight>
+                    )}
+                    keyExtractor={(item) => item.id.toString()}
+                />
+            ) : (
+                <Text style={styles.title}>Aucun favoris</Text>
+            )}
+
         </SafeAreaView>
     );
 }

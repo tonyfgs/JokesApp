@@ -5,6 +5,10 @@ import customReducer from "./reducers/customJokeReducer";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Theme} from "@react-navigation/native";
 import {CustomJoke} from "../model/CustomJoke";
+import {setFavoriteJoke} from "./actions/customAction";
+import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
+import {SampleJoke} from "../model/SampleJoke";
+import {Joke} from "../model/Joke";
 
 const reducer = {
     categorieReducer: categorieReducer,
@@ -13,7 +17,6 @@ const reducer = {
 };
 
 
-// @ts-ignore
 const store = configureStore({
     // @ts-ignore
     reducer,
@@ -59,30 +62,43 @@ export const storeFavoriteJoke =async (joke) => {
     }
 }
 
-export const getFavorite = async () => {
-    try {
-        const jsonValue = await AsyncStorage.getItem('@favorite')
-        return jsonValue != null ? JSON.parse(jsonValue) as CustomJoke[] : null;
-    } catch(e) {
-        console.log(e);
+export const getFavorite = () => {
+    return async (dispatch) => {
+        try {
+            const favoriteJokes = await AsyncStorage.getItem('favorites');
+            let favoriteJokesList = favoriteJokes != null ? JSON.parse(favoriteJokes) : [];
+            favoriteJokesList = favoriteJokesList.filter(joke => joke.id !== undefined);
+            await AsyncStorage.setItem('favorites', JSON.stringify(favoriteJokesList));
+            dispatch(setFavoriteJoke(favoriteJokesList));
+        } catch (e) {
+            console.log(e);
+        }
     }
 }
 
-export const removeFavoriteJoke = async (joke) => {
-    try {
-        const jsonValue = await AsyncStorage.getItem('@favorite')
-        let favoriteJokes = jsonValue != null ? JSON.parse(jsonValue) as CustomJoke[] : [];
-        const index = favoriteJokes.indexOf(joke);
-        if (index > -1) {
-            favoriteJokes.splice(index, 1);
+export const removeFavoriteJoke =  (joke) => {
+    return async (dispatch) => {
+        try {
+            const jsonValue = await AsyncStorage.getItem('@favorite')
+            let favoriteJokes = jsonValue != null ? JSON.parse(jsonValue) : [];
+            const index = favoriteJokes.indexOf(joke);
+            if (index > -1) {
+                favoriteJokes.splice(index, 1);
+            }
+            const updatedJsonValue = JSON.stringify(favoriteJokes);
+            AsyncStorage.setItem('@favorite', updatedJsonValue);
+            console.log("favorite removed");
+        } catch (e) {
+            console.log(e);
         }
-        const updatedJsonValue = JSON.stringify(favoriteJokes);
-        await AsyncStorage.setItem('@favorite', updatedJsonValue);
-        console.log("favorite removed");
-    }
-    catch (e) {
-        console.log(e);
     }
 }
+
+export type AppDispatch = typeof store.dispatch;
+
+export type AppStore = ReturnType<typeof store.getState>;
+
+export const useAppDispatch = () => useDispatch<AppDispatch>();
+export const useAppSelector: TypedUseSelectorHook<AppStore> = useSelector;
 
 export default store;

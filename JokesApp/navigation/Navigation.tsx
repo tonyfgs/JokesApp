@@ -19,8 +19,6 @@ import {ListFavoriteJokeScreen} from "../screens/ListFavoriteJokeScreen";
 
 
 export function Navigation(){
-
-
     const BottomTabNavigator = createBottomTabNavigator();
 
     const [themes, setThemes] = useState<Theme>(DefaultTheme);
