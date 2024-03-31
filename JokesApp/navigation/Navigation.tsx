@@ -15,7 +15,6 @@ const addIcon = require("../assets/add_icon.png");
 const favIcon = require("../assets/favorite_icon.png");
 const setIcon = require("../assets/settings_icon.png");
 import store, {getTheme, storeTheme} from "../redux/store";
-import {ListFavoriteJokeScreen} from "../screens/ListFavoriteJokeScreen";
 
 
 export function Navigation(){
