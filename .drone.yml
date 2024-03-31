@@ -10,6 +10,6 @@
           from_secret: SECRET_SONAR_LOGIN
         project_key: JokesApp
         commands:
-           - cd Source
+           - cd JokesApp
            - npm install
            - sonar-scanner -Dsonar-projectkey=$${project_key} -Dsonar.sources=. -Dsonar.host.url=$${sonar_host} -Dsonar. login=$${sonar_token}
