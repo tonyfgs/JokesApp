@@ -58,7 +58,7 @@ export function ListJokeScreen({route, navigation}) {
             <FlatList
                 data={isActivated2 ? DataCustomsJoke : DataGen}
                 renderItem={({ item }) => (
-                    <TouchableHighlight onPress={() => navigation.navigate("JokeDetail", {"joke" : item.id, "state" : isActivated2})}>
+                    <TouchableHighlight onPress={() => navigation.navigate("JokeDetail", {"joke" : item.id})}>
                         <JokeListItems item={item}/>
                     </TouchableHighlight>
                 )}

@@ -13,10 +13,12 @@ type DetailJokeProps = {
 
 export function DetailJoke(props: DetailJokeProps) {
 
-    const [isActivated, setIsActivated] = useState(false);
-    const [isActivated2, setIsActivated2] = useState(false);
     const favoriteJokes = useAppSelector(state => state.customReducer.favoriteJokes) as [CustomJoke, SampleJoke];
     const dispatch = useAppDispatch();
+    const isFav : boolean = favoriteJokes.some(it => it.id == props.item.id )
+    console.log("Is fav"+isFav)
+    const [isActivated, setIsActivated] = useState(isFav);
+    const [isActivated2, setIsActivated2] = useState(false);
 
     function toggleActivation() {
         setIsActivated(!isActivated);
@@ -29,6 +31,8 @@ export function DetailJoke(props: DetailJokeProps) {
             console.log("Joke ajoutée aux favoris");
         }
     }
+
+
 
 
     function toggleActivation2() {

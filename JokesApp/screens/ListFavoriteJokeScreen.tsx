@@ -22,21 +22,12 @@ export function ListFavoriteJokeScreen({route, navigation}){
     }, []);
 
 
-    let fav = true;
-    if (favoriteJokes.length <= 0) {
-         fav = false;
-    }
-    else {
-         fav = true;
-    }
-    console.log(fav);
-    console.log(favoriteJokes.length);
-    //console.log(favoriteJokes[1].id);
+
     const styles = themeSettings();
 
     return (
         <SafeAreaView style={styles.container}>
-            { fav ? (
+            { favoriteJokes.length ? (
                 <FlatList
                     data = {favoriteJokes}
                     renderItem={({ item }) => (

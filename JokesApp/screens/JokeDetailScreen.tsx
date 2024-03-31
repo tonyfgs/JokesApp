@@ -14,16 +14,17 @@ export default function JokeDetailScreen({route}) {
     const isFocused = useIsFocused();
     const dispatch = useDispatch();
     const jokeId = route.params.joke;
-    const state = route.params.state;
-    console.log(state);
+    const isFavoris = route.params.isFavoris
 
-    const DataGen = state ? useSelector((state: any) => state.customReducer.completCustomJoke) : useSelector((state: any) => state.sampleReducer.completJoke);
+
+
+    const DataGen = typeof jokeId === "string" ? useSelector((state: any) => state.customReducer.completCustomJoke) : useSelector((state: any) => state.sampleReducer.completJoke);
    // const DataGen = useSelector((state: any) => state.sampleReducer.completJoke);
 
     useEffect(() => {
         const getDetails = async () => {
             // @ts-ignore
-           { state  ? await dispatch(getJokesCustomsById(jokeId)) : await dispatch(getCompletJokes(jokeId));}
+           {  typeof jokeId === "string"  ? await dispatch(getJokesCustomsById(jokeId)) : await dispatch(getCompletJokes(jokeId));}
 
         };
         getDetails();
@@ -38,7 +39,7 @@ export default function JokeDetailScreen({route}) {
     return (
         <View style={styles.font}>
             <DetailJoke item={DataGen}/>
-            {state ? <TouchableOpacity onPress={deleteJokes}>
+            {typeof jokeId === "string"  ? <TouchableOpacity onPress={deleteJokes}>
                 <Image style={styles.img} source={require('../assets/delete-icon.png')} />
             </TouchableOpacity> : null}
         </View>
