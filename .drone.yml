@@ -3,7 +3,7 @@
   name: default
   steps:
     - name: build
-      image: mcr.microsoft.com/dotnet/sdk:8.0
+      image: hub.codefirst.iut.uca.fr/camille.petitalot/drone-sonarplugin-reactnative:latest
       commands:
         - cd JokesApp
         - npm install
