@@ -6,12 +6,40 @@ import {DetailJoke} from "../components/DetailJoke";
 import JokeDetailScreen from "../screens/JokeDetailScreen";
 import {ListJokeScreen} from "../screens/ListJokeScreen";
 import {darksalmonColor, indigo, purpleColor} from "../Theme";
+import {ListFavoriteJokeScreen} from "../screens/ListFavoriteJokeScreen";
 
-export default function StackNavigation() {
 
+export function CatalogueScreen(){
+const Stack = createStackNavigator();
+return(
+    <Stack.Navigator initialRouteName="CatalogueStack" screenOptions={
+        {
+            headerTitleStyle: {
+                fontSize: 24,
+                fontWeight: 'bold',
+                color: darksalmonColor,
+
+            },
+            headerStyle: {
+                backgroundColor: indigo,
+
+            },
+            headerTitle : "Catalogue",
+            headerBackTitleVisible: false,
+            headerTintColor: darksalmonColor,
+        }
+
+    }>
+            <Stack.Screen name="CatalogueStack" component={ListJokeScreen} options={{ headerTitle: 'Catalogue' }}/>
+            <Stack.Screen name="JokeDetail" component={JokeDetailScreen} options={{ headerTitle: 'Detail d une blague' }
+            } />
+    </Stack.Navigator>
+)}
+
+export function FavoriteScreen(){
     const Stack = createStackNavigator();
     return(
-        <Stack.Navigator initialRouteName="CatalogueStack" screenOptions={
+        <Stack.Navigator initialRouteName="FavoriteStack" screenOptions={
             {
                 headerTitleStyle: {
                     fontSize: 24,
@@ -23,15 +51,15 @@ export default function StackNavigation() {
                     backgroundColor: indigo,
 
                 },
-                headerTitle : "Catalogue",
+                headerTitle : "Favoris",
                 headerBackTitleVisible: false,
                 headerTintColor: darksalmonColor,
             }
 
         }>
-                <Stack.Screen name="CatalogueStack" component={ListJokeScreen} options={{ headerTitle: 'Catalogue' }}/>
-                <Stack.Screen name="JokeDetail" component={JokeDetailScreen} options={{ headerTitle: 'Detail d une blague' }
-                } />
+            <Stack.Screen name="FavoriteStack" component={ListFavoriteJokeScreen} options={{ headerTitle: 'Favoris' }}/>
+            <Stack.Screen name="JokeDetail" component={JokeDetailScreen} options={{ headerTitle: 'Detail d une blague' }
+            } />
         </Stack.Navigator>
     )
 }
