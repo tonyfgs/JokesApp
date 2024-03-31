@@ -6,6 +6,7 @@ export enum CustomActionType {
     FETCH_CUSTOMS_JOKE = 'FETCH_CUSTOMS_JOKE',
     FETCH_CUSTOMS_JOKE_BY_ID = 'FETCH_CUSTOMS_JOKE_BY_ID',
     DELETE_CUSTOM_JOKE = 'DELETE_CUSTOM_JOKE',
+    FETCH_FAVORITE_JOKE = 'FETCH_FAVORITE_JOKE'
 }
 
 export interface CustomAction {
@@ -22,6 +23,8 @@ export interface CustomsAction {
     type: CustomActionType;
     payload: CustomJoke[];
 }
+
+
 
 export type Action = CustomAction;
 
@@ -55,6 +58,12 @@ export const setDeleteCustomJoke = (deleteCustomJoke: CustomJoke): postCustomAct
     }
 }
 
+export const setFavoriteJoke = (favoriteJokes: CustomJoke[]): CustomsAction => {
+    return {
+        type: CustomActionType.FETCH_FAVORITE_JOKE,
+        payload: favoriteJokes
+    }
+}
 
 
 export const postJoke = (type : string, setup : string, punchline : string) => {

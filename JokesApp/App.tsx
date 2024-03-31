@@ -5,9 +5,11 @@ import {Navigation} from "./navigation/Navigation";
 import {darksalmonColor, indigo, purpleColor} from "./Theme";
 import {Provider} from "react-redux";
 import store from "./redux/store";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 export default function App() {
+    //AsyncStorage.clear()
     return (
         <Provider store={store}>
         <SafeAreaView style={styles.container}>

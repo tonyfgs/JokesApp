@@ -4,6 +4,7 @@ import React, {useState} from "react";
 import {SampleJoke} from "../model/SampleJoke";
 import {Joke} from "../model/Joke";
 import {CustomJoke} from "../model/CustomJoke";
+import {removeFavoriteJoke, storeFavoriteJoke, useAppDispatch, useAppSelector} from "../redux/store";
 
 type DetailJokeProps = {
     item: CustomJoke;
@@ -12,12 +13,26 @@ type DetailJokeProps = {
 
 export function DetailJoke(props: DetailJokeProps) {
 
-    const [isActivated, setIsActivated] = useState(false);
+    const favoriteJokes = useAppSelector(state => state.customReducer.favoriteJokes) as [CustomJoke, SampleJoke];
+    const dispatch = useAppDispatch();
+    const isFav : boolean = favoriteJokes.some(it => it.id == props.item.id )
+    console.log("Is fav"+isFav)
+    const [isActivated, setIsActivated] = useState(isFav);
     const [isActivated2, setIsActivated2] = useState(false);
 
     function toggleActivation() {
         setIsActivated(!isActivated);
+        if (isActivated) {
+            console.log("Joke retirée des favoris");
+            dispatch(removeFavoriteJoke(props.item));
+        }
+        else {
+            dispatch(storeFavoriteJoke(props.item));
+            console.log("Joke ajoutée aux favoris");
+        }
     }
+
+
 
 
     function toggleActivation2() {

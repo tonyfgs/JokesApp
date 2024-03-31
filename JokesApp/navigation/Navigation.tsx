@@ -8,21 +8,20 @@ import {AccueilScreen} from "../screens/AccueilScreen";
 import {AddJokeScreen} from "../screens/AddJokeScreen";
 import {SettingsScreen} from "../screens/SettingsScreen";
 import {JokeListItems} from "../components/ListeJokeComponent";
-import StackNavigation from "./StackNavigation";
+import {CatalogueScreen, FavoriteScreen} from "./StackNavigation";
 const homeIcon = require("../assets/home_icon.png");
 const listIcon = require("../assets/list_icon.png");
 const addIcon = require("../assets/add_icon.png");
 const favIcon = require("../assets/favorite_icon.png");
 const setIcon = require("../assets/settings_icon.png");
 import store, {getTheme, storeTheme} from "../redux/store";
+import {ListFavoriteJokeScreen} from "../screens/ListFavoriteJokeScreen";
 
 
 export function Navigation(){
-
-
     const BottomTabNavigator = createBottomTabNavigator();
 
-    const [themes, setThemes] = useState<Theme | null>(null);
+    const [themes, setThemes] = useState<Theme>(DefaultTheme);
 
     useEffect(() => {
         const fetchTheme = async () => {
@@ -36,10 +35,6 @@ export function Navigation(){
     if (themes == null) {
         return null;
     }
-
-    console.log("ici le theme", themes);
-
-
     return (
         <NavigationContainer  theme={ themes.dark === false ? DefaultTheme :  DarkTheme} >
             <BottomTabNavigator.Navigator initialRouteName="Home"  screenOptions={{
@@ -63,7 +58,7 @@ export function Navigation(){
                                                    />
                                                )
                                            }}/>
-                <BottomTabNavigator.Screen name="Catalogue" component={StackNavigation}
+                <BottomTabNavigator.Screen name="Catalogue" component={CatalogueScreen}
                                            options={{
                                                tabBarIcon: ({focused}) => (
                                                    <Image source={listIcon}
@@ -84,13 +79,14 @@ export function Navigation(){
 
                                            }}/>
 
-                <BottomTabNavigator.Screen name="Favoris" component={ListJokeScreen}
+                <BottomTabNavigator.Screen name="Favoris" component={FavoriteScreen}
                                            options={{
                                                tabBarIcon: ({focused}) => (
                                                    <Image source={favIcon}
                                                           style={{ tintColor: focused ? darksalmonColor : purpleColor }}
                                                    />
-                                               )
+                                               ),
+                                               headerShown: false,
                                            }}/>
                 <BottomTabNavigator.Screen name="Paramètres" component={SettingsScreen}
                                            options={{
