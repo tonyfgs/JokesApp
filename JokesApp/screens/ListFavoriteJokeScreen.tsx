@@ -10,7 +10,7 @@ import {useAppSelector, useAppDispatch} from "../redux/store";
 import {useDispatch} from "react-redux";
 export function ListFavoriteJokeScreen({route, navigation}){
 
-    const favoriteJokes = useAppSelector((state) => state.customReducer.favoriteJokes as [CustomJoke, SampleJoke]);
+    const favoriteJokes: CustomJoke[] = useAppSelector((state) => state.customReducer.favoriteJokes);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -20,6 +20,8 @@ export function ListFavoriteJokeScreen({route, navigation}){
         }
         getFavoriteJokes();
     }, []);
+
+
     let fav = true;
     if (favoriteJokes.length <= 0) {
          fav = false;

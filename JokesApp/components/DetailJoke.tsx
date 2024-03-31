@@ -15,7 +15,6 @@ export function DetailJoke(props: DetailJokeProps) {
 
     const [isActivated, setIsActivated] = useState(false);
     const [isActivated2, setIsActivated2] = useState(false);
-
     const favoriteJokes = useAppSelector(state => state.customReducer.favoriteJokes) as [CustomJoke, SampleJoke];
     const dispatch = useAppDispatch();
 
@@ -23,7 +22,7 @@ export function DetailJoke(props: DetailJokeProps) {
         setIsActivated(!isActivated);
         if (isActivated) {
             console.log("Joke retirée des favoris");
-            dispatch(removeFavoriteJoke());
+            dispatch(removeFavoriteJoke(props.item));
         }
         else {
             dispatch(storeFavoriteJoke(props.item));

@@ -9,6 +9,7 @@ import {setFavoriteJoke} from "./actions/customAction";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import {SampleJoke} from "../model/SampleJoke";
 import {Joke} from "../model/Joke";
+import {JokeFactory} from "../model/JokeFactory";
 
 const reducer = {
     categorieReducer: categorieReducer,
@@ -46,21 +47,19 @@ export const getTheme = async () => {
     }
 }
 
-export const storeFavoriteJoke = (joke : Joke) => {
+export const storeFavoriteJoke = (joke : CustomJoke) => {
     return async dispatch => {
         try {
             const favoriteJokes = await AsyncStorage.getItem('favorites');
-            const favoriteJokesList = favoriteJokes != null ? JSON.parse(favoriteJokes) : [];
+            const favoriteJokesList: CustomJoke[] = favoriteJokes != null ? JokeFactory.createCustomJokes(favoriteJokes) : [];
             favoriteJokesList.push(joke);
-            await AsyncStorage.setItem('favorites', JSON.stringify(favoriteJokesList));
-            const favorites = favoriteJokesList.map(joke => new SampleJoke(joke["type"], joke["setup"], joke["punchline"], joke["image"], joke["id"]))
-            dispatch(setFavoriteJoke(favorites));
+            await AsyncStorage.setItem('favorites', JSON.stringify(favoriteJokesList.map(j => ({type: j.type, setup: j.setup, punchline: j.punchline, image: j.image, id: j.id}))));
+            dispatch(setFavoriteJoke(favoriteJokesList));
         } catch (e) {
             console.log(e);
         }
     }
 }
-
 export const getFavorite = () => {
     return async (dispatch) => {
         try {
@@ -76,16 +75,23 @@ export const getFavorite = () => {
     }
 }
 
-export const removeFavoriteJoke =  () => {
+export const removeFavoriteJoke =  (joke : CustomJoke) => {
     return async dispatch => {
         try {
-            await AsyncStorage.clear()
+            const favoriteJokes = await AsyncStorage.getItem('favorites');
+            let favoriteJokesList: CustomJoke[] = favoriteJokes != null ? JokeFactory.createCustomJokes(favoriteJokes) : [];
+            const index = favoriteJokesList.findIndex((j) => j.id === joke.id);
+            if (index !== -1) {
+                favoriteJokesList.splice(index, 1);
+                await AsyncStorage.setItem('favorites', JSON.stringify(favoriteJokesList.map(j => ({type: j.type, setup: j.setup, punchline: j.punchline, image: j.image, id: j.id}))));
+                dispatch(setFavoriteJoke(favoriteJokesList));
+            }
+
         } catch (e) {
             console.log("An error occurred", e);
         }
     }
 }
-
 export type AppDispatch = typeof store.dispatch;
 
 export type AppStore = ReturnType<typeof store.getState>;
