@@ -6,8 +6,6 @@
       image: hub.codefirst.iut.uca.fr/camille.petitalot/drone-sonarplugin-reactnative:latest
       environment:
         sonar_host: https://codefirst.iut.uca.fr/sonar/
-        sonar_token:
-          from_secret: SECRET_SONAR_LOGIN
         project_key: JokesApp
         commands:
            - cd JokesApp
