@@ -7,6 +7,7 @@
       commands:
         - cd JokesApp
         - npm install
+        
 
     - name : sonar 
       image :  hub.codefirst.iut.uca.fr/camille.petitalot/drone-sonarplugin-reactnative:latest
