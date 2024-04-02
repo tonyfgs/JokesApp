@@ -7,3 +7,16 @@
       commands:
         - cd JokesApp
         - npm install
+
+  step :
+    - name : sonar 
+      image :  hub.codefirst.iut.uca.fr/camille.petitalot/drone-sonarplugin-reactnative:latest
+      environment:
+        sonar_host: https://codefirst.iut.uca.fr/sonar/
+        sonar_token:
+          from_secret: SECRET_SONAR_LOGIN
+        project_key: JokesApp
+      commands:
+        - cd JokesApp
+        - npm install
+        - sonar-scanner -Dsonar-projectkey=$${project_key} -Dsonar.sources=. -Dsonar.host.url=$${sonar_host} -Dsonar. login=$${sonar_token}
