@@ -14,7 +14,7 @@
         sonar_host: https://codefirst.iut.uca.fr/sonar/
         sonar_token:
           from_secret: SECRET_SONAR_LOGIN
-        project_key: JokesApp
+        project_key: JokesAppSonar
       commands:
         - cd JokesApp
         - npm install
