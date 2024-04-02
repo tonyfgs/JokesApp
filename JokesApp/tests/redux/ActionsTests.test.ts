@@ -39,4 +39,25 @@ describe('Action tests', () => {
         expect(setCustomsJokeById(completCustomJoke)).toEqual(expectedAction);
     }
     );
+
+    it('setDeleteCustomJoke creates correct action', () => {
+        const deleteCustomJoke = new CustomJoke('test', 'Why did the chicken...', 'To get to the other side!', 'http://www.jokes.com/joke1', "1");
+        const expectedAction = {
+            type: CustomActionType.DELETE_CUSTOM_JOKE,
+            payload: deleteCustomJoke,
+        };
+        expect(setDeleteCustomJoke(deleteCustomJoke)).toEqual(expectedAction);
+    }
+    );
+
+    it('setFavoriteJoke creates correct action', () => {
+        const favoriteJokes = [new CustomJoke('test', 'Why did the chicken...', 'To get to the other side!', 'http://www.jokes.com/joke1', "1")];
+        const expectedAction = {
+            type: CustomActionType.FETCH_FAVORITE_JOKE,
+            payload: favoriteJokes,
+        };
+        expect(setFavoriteJoke(favoriteJokes)).toEqual(expectedAction);
+    }
+    );
+
 });
