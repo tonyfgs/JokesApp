@@ -10,7 +10,7 @@ import {
 } from "../../redux/actions/customAction";
 
 
-describe('Action Tests', () => {
+describe('Action tests', () => {
     it('setPostJoke creates correct action', () => {
         const postJoke =  new CustomJoke('test', 'Why did the chicken...', 'To get to the other side!', 'http://www.jokes.com/joke1', "1");
         const expectedAction = {

@@ -18,4 +18,5 @@
       commands:
         - cd JokesApp
         - npm install
-        - sonar-scanner -Dsonar.projectKey=$${project_key} -Dsonar.sources=. -Dsonar.host.url=$${sonar_host} -Dsonar.login=$${sonar_token}
+        - npm run test
+        - sonar-scanner -Dsonar.projectKey=$${project_key} -Dsonar.sources=. -Dsonar.host.url=$${sonar_host} -Dsonar.login=$${sonar_token} -Dsonar.javascript.lcov.reportPaths=/lcov.info -Dsonar.exclusions=/coverage//*,/tests/*/
