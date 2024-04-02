@@ -18,5 +18,4 @@
       commands:
         - cd JokesApp
         - npm install
-        - sonar-scanner -Dsonar.projectKey=$${project_key} -Dsonar.sources=. -Dsonar.host.url=$${sonar_host} 
-        -Dsonar.login=$${sonar_token}
+        - sonar-scanner -Dsonar.projectKey=$${project_key} -Dsonar.sources=. -Dsonar.host.url=$${sonar_host} -Dsonar.login=$${sonar_token}
