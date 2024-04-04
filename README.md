@@ -20,12 +20,22 @@ Chaque partie du projet est associée à une branche distincte dans ce dépôt. 
 
 - [x] Partie 1 - `part1`
   - Création projet, création classes Typescript, création  Stub pour ce modèle
-- [ ] Partie 2 - `part2`
-  - *
-- [ ] Partie 3 - `part3`
-  - *
-- [ ] Partie 4 - `part4`
-  - *
+- [x] Partie 2 - `part2`
+  - Creation page "Catalogue" + implementation FlatList de "SamplesJokes"
+- [x] Partie 3 - `part3`
+  - Implementation navigation et création page "Accueil"
+- [x] Partie 4 - `part4`
+  - Connection à l'<a href="https://iut-weather-api.azurewebsites.net/swagger-ui/#/Jokes">API Jokes</a>
+- [x] Partie 5 - `part5`
+  - Implementation détail d'une "Joke" + StackNavigation
+- [x] Partie 6 - `tp6`
+  - Création de "CustomsJokes"
+- [x] Partie 7 - `tp7`
+  - Changement de theme et suppresion de "CustomsJokes"
+- [x] Partie 8 - `pt8`
+  - Ajout de la fonctionnalité favorie
+- [x] Partie 9 - `tp9`
+  - Réalisations des tests et déploiement sur sonar
 
 ## Installation et Configuration
 1. Clonez le dépôt : `git clone https://codefirst.iut.uca.fr/git/tony.fages/Tp_ReactNative.git`
